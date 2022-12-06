@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Signup</title>
+
+<script>
+
+  function login(){
+  let loginname = document.forms["signin"]["name"];
+  let password = document.forms["signin"]["Password"];
+
+  console.log(loginname);
+  console.log(password);
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Accept", "application/json");
+myHeaders.append("Authorization", "<API Key>");
+
+var raw = JSON.stringify({
+  "email": loginname,
+  "password": password
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://127.0.0.1:8000/user/api/login/", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+    return true;
+
+  }
+      
+function function_reg(){
+
+  let email = document.forms["signup"]["email1"];
+  let firstname = document.forms["signup"]["fname"];
+  let lastname = document.forms["signup"]["lname"];
+  let password = document.forms["signup"]["password"];
+
+
+  var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Accept", "application/json");
+myHeaders.append("Authorization", "<API Key>");
+
+
+  var raw = JSON.stringify({
+  "email": email,
+  "first_name": firstname,
+  "last_name": lastname,
+  "password": password
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://127.0.0.1:8000/user/api/register/", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+    return true;
+
+}
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="#" class="sign-in-form" name="signin" id="signin">
+
+            <h2 class="title">Sign in</h2>
+
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Email" name = "email"id = "email"/>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" name="Password" id  = "Password" />
+            </div>
+            <input type="submit" onsubmit=" return login()" value="Login" class="btn solid" />
+          </form>
+
+
+          <form action="#" class="sign-up-form" name="signup" id="signup">
+            <h2 class="title">Sign up</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="First Name" name="fname" id="fname" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Last Name" name = "fname" id="lname" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email" name = "email1" id="email1" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" name="password" id="password"/>
+            </div>
+            <input type="submit" onsubmit="return function_reg()" class="btn" value="Sign up" />
+          </form>
+        </div>
+      </div>
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here ?</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum minima beatae ipsa odit iure magni rem nihil numquam dolores in! Et eius ducimus illum.
+            </p>
+            <button class="btn transparent" id="sign-up-btn">
+              Sign up
+            </button>
+          </div>
+          <img src="img/log.svg" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>One of us ?</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+              laboriosam ad deleniti.
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              Sign in
+            </button>
+          </div>
+          <img src="img/register.svg" class="image" alt="" />
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
